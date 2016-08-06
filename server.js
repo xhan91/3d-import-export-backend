@@ -8,8 +8,11 @@ const orm = require('./orm');
 const port = process.env.PORT || 8000;
 const router = express.Router();
 
+router.use(express.static(__dirname + '/public'));
+
 router.get('/', function(req, res){
-    res.json({ message: 'Hello World!' });
+    // res.json({ message: 'Hello World!' });
+    res.sendFile('/index.html');
 });
 
 router.route('/all/:format/:origin_id').get(function(req, res){
@@ -17,7 +20,7 @@ router.route('/all/:format/:origin_id').get(function(req, res){
 });
 
 router.route('/:id/:format/:origin_id').get(function(req, res){
-    
+
 });
 
 app.use('/', router);
