@@ -15,12 +15,12 @@ router.get('/', function(req, res){
     res.sendFile('/index.html');
 });
 
-router.route('/all/:format/:origin_id').get(function(req, res){
+router.route('/:format/:origin_id').get(function(req, res){
     orm.findTrades(req.params.origin_id, req.params.format, res);
 });
 
-router.route('/:id/:format/:origin_id').get(function(req, res){
-
+router.route('/:format/:origin_id/:product_id').get(function(req, res){
+    orm.findDetailTrades(req.params.origin_id, req.params.format, req.params.product_id, res);
 });
 
 app.use('/', router);
