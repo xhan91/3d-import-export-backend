@@ -50,12 +50,12 @@ function findDetailTrades(origin_id, format, sitc_id, res) {
   }).then(function(detailTrades){
     detailTrades.forEach(function(detailTrade){
       var queryResult = {
-        import: { dest_id: detailTrades.dest_id, import_val: detailTrades.import_val },
-        export: { dest_id: detailTrades.dest_id, export_val: detailTrades.export_val }
+        import: { dest_id: detailTrade.dest_id, import_val: detailTrade.import_val },
+        export: { dest_id: detailTrade.dest_id, export_val: detailTrade.export_val }
       }
 
       result.push(queryResult[format] || 
-        { dest_id: detailTrades.dest_id, import_val: detailTrades.import_val, export_val: detailTrades.export_val });
+        { dest_id: detailTrade.dest_id, import_val: detailTrade.import_val, export_val: detailTrade.export_val });
     });
 
     res.json(result);
