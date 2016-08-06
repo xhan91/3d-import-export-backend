@@ -48,14 +48,14 @@ function findDetailTrades(origin_id, format, sitc_id, res) {
   SitcYodp.findAll({
     where: query[format] || { origin_id: origin_id, sitc_id: sitc_id }
   }).then(function(detailTrades){
-    trades.forEach(function(detailTrade){
+    detailTrades.forEach(function(detailTrade){
       var queryResult = {
-        import: { dest_id: trade.dest_id, import_val: trade.import_val },
-        export: { dest_id: trade.dest_id, export_val: trade.export_val }
+        import: { dest_id: detailTrades.dest_id, import_val: detailTrades.import_val },
+        export: { dest_id: detailTrades.dest_id, export_val: detailTrades.export_val }
       }
 
       result.push(queryResult[format] || 
-        { dest_id: trade.dest_id, import_val: trade.import_val, export_val: trade.export_val });
+        { dest_id: detailTrades.dest_id, import_val: detailTrades.import_val, export_val: detailTrades.export_val });
     });
 
     res.json(result);
