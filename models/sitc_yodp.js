@@ -1,11 +1,20 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('sitc_yd', {
+  return sequelize.define('sitc_yodp', {
     year: {
       type: DataTypes.INTEGER(4),
       allowNull: false,
       primaryKey: true
+    },
+    origin_id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'attr_country',
+        key: 'id'
+      }
     },
     dest_id: {
       type: DataTypes.STRING,
@@ -15,6 +24,20 @@ module.exports = function(sequelize, DataTypes) {
         model: 'attr_country',
         key: 'id'
       }
+    },
+    sitc_id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'attr_sitc',
+        key: 'id'
+      }
+    },
+    sitc_id_len: {
+      type: DataTypes.INTEGER(1),
+      allowNull: true,
+      defaultValue: '6'
     },
     export_val: {
       type: DataTypes.DECIMAL,
@@ -58,6 +81,6 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     timestamps: false,
-    tableName: 'sitc_yd'
+    tableName: 'sitc_yodp'
   });
 };
