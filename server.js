@@ -21,6 +21,10 @@ router.get('/', function(req, res){
     res.sendFile('/index.html');
 });
 
+router.get('/sitcnames', function(req, res){
+    orm.sitcNames(res);
+});
+
 router.route('/:format/:origin_id').get(function(req, res){
     orm.findTrades(req.params.origin_id, req.params.format, res);
 });

@@ -12,7 +12,20 @@ const sequelize = new Sequelize('global_trading', 'xhan91', '', {
 });
 
 var SitcYod = sequelize.import('./models/sitc_yod.js');
-var SitcYodp = sequelize.import('./models/sitc_yodp.js')
+var SitcYodp = sequelize.import('./models/sitc_yodp.js');
+var AttrSitcName = sequelize.import('./models/attr_sitc_name.js');
+
+function sitcNames(res){
+    var result = [];
+    AttrSitcName.findAll({
+        where: { lang: 'en' }
+    }).then(function(names){
+        names.forEach(function(name){
+            result.push({sitc_id: name.sitc_id, name: name.name, keywords: name.keywords});
+        });
+        res.json(result);
+    });
+}
 
 function findTrades(origin_id, format, res) {
   var result = [];
@@ -64,3 +77,4 @@ function findDetailTrades(origin_id, format, sitc_id, res) {
 
 exports.findTrades = findTrades;
 exports.findDetailTrades = findDetailTrades;
+exports.sitcNames = sitcNames;
