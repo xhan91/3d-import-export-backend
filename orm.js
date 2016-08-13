@@ -18,7 +18,7 @@ var AttrSitcName = sequelize.import('./models/attr_sitc_name.js');
 function sitcNames(res){
     var result = [];
     AttrSitcName.findAll({
-        where: { lang: 'en' }
+        where: { lang: 'en', sitc_id: {$gt: 1000} }
     }).then(function(names){
         names.forEach(function(name){
             result.push({sitc_id: name.sitc_id, name: name.name, keywords: name.keywords});
